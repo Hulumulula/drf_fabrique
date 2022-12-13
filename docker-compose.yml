@@ -1,0 +1,35 @@
+version: '3.9'
+
+services:
+  redis:
+    image: redis
+    restart: always
+    container_name: 'redis'
+  web:
+    build: .
+    restart: always
+    container_name: 'app_django'
+    command: bash -c "python manage.py makemigrations && python manage.py migrate && python manage.py runserver 0.0.0.0:8000"
+    volumes:
+      - .:/FabricaResheniy
+    ports:
+      - '8000:8000'
+  celery:
+    build: .
+    container_name: 'celery'
+    command: celery -A FabricaResheniy worker -l info -B
+    volumes:
+      - .:/FabricaResheniy
+    links:
+      - redis
+    depends_on:
+      - web
+      - redis
+  flower:
+    container_name: flower
+    build: .
+    command: celery -A FabricaResheniy flower
+    ports:
+      - "5555:5555"
+    depends_on:
+      - celery

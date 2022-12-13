@@ -1,0 +1,45 @@
+<h3>Вся статистика по рассылкам</h3>
+<hr/>
+{% for mail in context %}
+    <p>Рассылка с id: {{ mail.id }}</p>
+    <ul>
+        <li>Всего сообщений: {{ mail.count_messages }}</li>
+        <li>Отправлено сообщений клиентам: {{ mail.count_status_sent }}</li>
+        <li>
+            Клиенты, которые получили сообщение:
+            <ul>
+                {% if mail.list_clients_sent|length > 10 %}
+                    {% for client in mail.list_clients_sent|slice:":9" %}
+                        <li>тел. : +{{ client }}</li>
+                    {% endfor %}
+                    ...
+                {% elif mail.list_clients_sent|length > 0 %}
+                    {% for client in mail.list_clients_sent%}
+                        <li>тел. : +{{ client }}</li>
+                    {% endfor %}
+                {% else %}
+                    <li>Пусто</li>
+                {% endif %}
+            </ul>
+        </li>
+        <li>Не отправлено сообщений клиентам: {{ mail.count_status_not_sent }}</li>
+        <li>
+            Клиенты, которые НЕ получили сообщение:
+            <ul>
+                {% if mail.list_clients_not_sent|length > 10 %}
+                    {% for client in mail.list_clients_not_sent|slice:":9" %}
+                        <li>тел. : +{{ client }}</li>
+                    {% endfor %}
+                    ...
+                {% elif mail.list_clients_not_sent|length > 0 %}
+                    {% for client in mail.list_clients_not_sent%}
+                        <li>тел. : +{{ client }}</li>
+                    {% endfor %}
+                {% else %}
+                    <li>Пусто</li>
+                {% endif %}
+            </ul>
+        </li>
+    </ul>
+{% endfor %}
+<p>Это сообщение создано автоматически. Не нужно на него отвечать :)</p>
