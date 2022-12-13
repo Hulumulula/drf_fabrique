@@ -12,13 +12,30 @@
 
     cd some_name/    
 
-<p>Скачиваем с github в нашу директорию:</p>
+<p>Скачиваем с gitlab или github в нашу директорию:</p>
 
+    git clone https://gitlub.com/hulumulula/drf_fabrique.git
     git clone https://github.com/hulumulula/drf_fabrique.git 
     
 <p>Переходим в директорию проекта</p>
 
     cd drf_fabrique/
+
+Создаём виртуальное окружение и заходим в него
+
+    python3 -m venv YourNameEnv
+    source YourNameEnv/bin/activate
+    
+Устанавливаем все зависимости:
+
+    pip install -r requierment.txt
+    
+Для пользователей Anaconda
+
+    conda create YourNameEnv
+    conda activate YourNameEnv
+    conda install pip
+    pip install -r requierment.txt
 
 <h2>Запуск</h2>
 <h4>Через docker-compose</h4>
@@ -40,22 +57,6 @@
     127.0.0.1:5555/
 
 <h4>Локально</h4>
-Создаём виртуальное окружение и заходим в него
-
-    python3 -m venv YourNameEnv
-    source YourNameEnv/bin/activate
-    
-Устанавливаем все зависимости:
-
-    pip install -r requierment.txt
-    
-Для пользователей Anaconda
-
-    conda create YourNameEnv
-    conda activate YourNameEnv
-    conda install pip
-    pip install -r requierment.txt
-
 Нужно создать миграции и принять их
 
     python manage.py makemigrations
@@ -67,6 +68,11 @@
     redis-server
     python -m celery -A FabricaResheniy worker -l info -B
     python -m celery -A FabricaResheniy flower
+
+Для запуска тестов выполнить(Celery запустить, если не запущен, раньше тестов):
+
+    python -m celery -A FabricaResheniy worker -l info -B
+    python manage.py test
 
 <h2>Выполненные пункты:</h2>
 
@@ -83,3 +89,4 @@
 Вся почта будет идти на мой почтовый адрес. Поэтому вам нужно изменить настройки почты в **FabricaResheniy/settings.py** 
 раздел **EMAIL** на ваши настройки. Все параметры настройки можно узнать у вашей почты.
 Пример **mail.ru**: https://help.mail.ru/mail/mailer/popsmtp
+
