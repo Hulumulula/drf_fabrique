@@ -1,5 +1,6 @@
 <h1 align="center"> DRF_Fabrique (Django REST framework + redis + celery) </h1>
-<p>Тестовое задание на вакансию Python-разработчик(Django, DRF)</p>
+<p>Тестовое задание на позицию Python-разработчик(Django, DRF)</p>
+<p>Тех. задание: https://www.craft.do/s/n6OVYFVUpq0o6L</p>
 <hr/>
 <h2>Начало</h2>
 <p>Для того, чтобы протестировать проект - его нужно скачать!)</p>
